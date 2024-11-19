@@ -1,28 +1,43 @@
-preis_erwachsene = 5.0
-preis_kinder = 2.5
-preis_premium = 3.0
-preis_basis = 4.0
+def tarifrechner():
+    
+    print("Willkommen im Museum XXX - Tarifauskunft")
+    gesamtpreis = 0.0 
 
-print(" ### Tarifauskunftsrechner Museum XXX ### ")
-print(" Hallo, geben Sie bitte Ihr Alter ein.")
-alter_gast = int(input())
+    while True:
+       
+        alter = int(input("Bitte geben Sie Ihr Alter ein: "))
 
-if alter_gast < 14:
-    print(" ### Eintritt Kinder ### ")
-    print(" Preis: ", preis_kinder, " Euro ")
-else:
-    print(" Sind Sie Mitglied im Duisburger Museumsclub? (Nachweis erforderlich) ")
-    print(" Wenn Sie Premium-Mitglied sind, geben Sie 'p' ein.")
-    print(" Wenn Sie Basis-Mitglied sind, geben Sie 'b' ein.")
-    print(" Wenn Sie kein Mitglied sind, drücken Sie eine beliebige andere Taste. ")
-    antwort_rabatt = input();
-    if antwort_rabatt == "p":
-        print(" ### Eintritt Premium-Mitglied ### ")
-        print(" Preis: ", preis_premium, " Euro ")
-        if antwort_rabatt == "b":
-            print(" ### Eintritt Basis-Mitglied ### ")
-            print(" Preis: ", preis_basis, " Euro ")
+        if alter <= 14:
+            preis = 2.50
+            print("Kinderpreis: 2,50 €")
+        elif 14 <= alter <= 17:
+            preis = 3.50
+            print("Jugendlicher: 3,50 €")
         else:
-            print(" ### Eintritt Erwachsene (voller Preis) ### ")
-            print(" Preis: ", preis_erwachsene, " Euro")
+            print("Sind Sie Mitglied im Museumsclub?")
+            print("1. Premiummitglied (3 €)")
+            print("2. Basismitglied (4 €)")
+            print("3. Keine Mitgliedschaft (5 €)")
+            mitgliedschaft = input("Wählen Sie Ihre Mitgliedschaft (1/2/3): ")
 
+            if mitgliedschaft == "1":
+                preis = 3.00
+                sekt = input("Möchten Sie für 0,75 € ein Glas Sekt dazu? (j/n): ").lower()
+                if sekt == "j":
+                    preis += 0.75
+            elif mitgliedschaft == "2":
+                preis = 4.00
+            else:
+                preis = 5.00
+
+        print(f"Ihr Ticket kostet: {preis:.2f} €")
+        gesamtpreis += preis
+    
+        erneut = input("Möchten Sie einen weiteren Tarif abfragen? (j/n): ").lower()
+        if erneut != "j":
+            break
+    
+    print(f"Die Gesamtsumme beträgt: {gesamtpreis:.2f} €")
+    print("Vielen Dank und viel Spaß im Museum!")
+
+tarifrechner()
